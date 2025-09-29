@@ -1,4 +1,8 @@
-# Watchable example
+# Watching functionality for typescript objects
+Typesafe watching functionality to typescript objects - eventnames must be a valid string key of the object followed by "Changed", e.g. "firstNameChanged" for a person object.
+## Watchable example
+When all objects of a class should be watchable (e.g. with an "on" event handler) simply extend your class with the watchable class and every object created can call .on("propertyChanged",(newValue)=>{console.log(newValue)}).
+
  ``` ts 
 class Person extends Watchable {
   private _firstName: string;
@@ -59,7 +63,8 @@ person.age = 27;           // Logs: Age changed to 27
 
 // TypeScript will still help with event name typos if you use a generic type for PropEventSource<Person>
 ```
-# MakeWatchedObject example 
+## MakeWatchedObject example 
+When only some instances of a class should be watchable (e.g. with an "on" event handler) simply make the object with the factory "makeWatchedObject"  and the instance returned has handlers registered and can call .on("propertyChanged",(newValue)=>{console.log(newValue)}).
 ``` ts 
 const person = makeWatchedObject({
   firstName: "Saoirse",
