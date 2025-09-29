@@ -58,10 +58,9 @@ person.on("ageChanged", (newValue) => {
   console.log("Age changed to", newValue);
 });
 
+// Event fires automatically, when changing a property due to watching implemented with Proxy object
 person.firstName = "Jane"; // Logs: First name changed to Jane
-person.age = 27;           // Logs: Age changed to 27
-
-// TypeScript will still help with event name typos if you use a generic type for PropEventSource<Person>
+person.age = 27;           // Logs: Age changed to 27 
 ```
 ## MakeWatchedObject example 
 When only some instances of a class should be watchable (e.g. with an "on" event handler) simply make the object with the factory "makeWatchedObject"  and the instance returned has handlers registered and can call .on("propertyChanged",(newValue)=>{console.log(newValue)}).
@@ -84,6 +83,6 @@ person.on("ageChanged", (newValue) => {
 // Type error: only "firstNameChanged", "lastNameChanged", "ageChanged" are allowed
 // person.on("firstName", () => {}); // Error
 
-// Changing a property (event fires automatically if implemented with Proxy)
+// Event fires automatically, when changing a property due to watching implemented with Proxy object
 person.firstName = "Jane"; // Should trigger "firstNameChanged" event
 ```
